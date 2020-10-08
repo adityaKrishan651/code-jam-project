@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
-import pkg_resources.py2_warn
+# import pkg_resources.py2_warn #will be used when we make .exe file of app.py
 from flaskwebgui import FlaskUI
 from datetime import datetime
 
