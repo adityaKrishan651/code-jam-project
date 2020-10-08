@@ -1,0 +1,1 @@
+pyinstaller -w -F --hidden-import=pkg_resources.py2_warn app.py
