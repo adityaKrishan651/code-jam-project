@@ -1,32 +1,31 @@
-<!DOCTYPE html>
-<head>
-    <title>Flask App | Todo</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"></head>
-<body>
-    <div style="margin-top: 50px;" class="ui container">
-    <h1 class="ui center aligned header">Add a Task</h1>
-    <form class="ui form" action="/add" method="POST" autocomplete="off">
-        <div class="field">
-            <label for="task">Add Some Task</label>
-            <input type="text" name="task" placeholder="Add some task that you want to do..."><br>
-            <button class="ui blue button" type="submit" style="margin-top: 10px;">Add</button>
+
+{% extends "base.html" %}
+
+{% block title %}Flask App | Todo List{% endblock %}
+
+{% block content%}
+<h1>Add a Task</h1>
+    <form action="/add" method="POST" autocomplete="off">
+        <div>
+            <label for="task">Add Some Task: </label>
+            <input type="text" name="task"><br>
+            <button style="margin-top: 10px;">Add</button>
         </div>
     </form>
 
     {% for todo in todo_list %}
-    <div class="ui segment">
-      <p class="ui big header"> {{ todo.id }} | {{ todo.task }} </p>
+    <div>
+      <p> {{ todo.id }} | {{ todo.task }} </p>
 
         {% if todo.complete == False %}
-            <span class="ui gray label">In Complete</span>
+            <span>In Complete</span>
         {% else %}
-            <span class="ui green label">Done</span>
+            <span>Done</span>
         {% endif %}
 
-        <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
-        <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+        <a href="/update/{{ todo.id }}">Update</a>
+        <a href="/delete/{{ todo.id }}">Delete</a>
     </div>
     {% endfor %}
-</div>
-</body>
-</html>
+
+{% endblock %}

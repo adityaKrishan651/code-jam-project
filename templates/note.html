@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Flask App | {{ note.title }} {% endblock %}
+
+{% block content%}
+
+<h2>{{ note.title }}</h2>
+
+<p>{{ note.content }}</p>
+
+{% endblock %}

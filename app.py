@@ -1,7 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 import pkg_resources.py2_warn
-from flaskwebgui import FlaskUI #get the FlaskUI class
+from flaskwebgui import FlaskUI
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -17,15 +18,44 @@ class Todo(db.Model):
     task = db.Column(db.String(200))
     complete = db.Column(db.Boolean)
 
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(20))
+    content = db.Column(db.String(1000))
+    date_created = db.Column(db.DateTime)
+
 @app.route('/')
 def index():
     return render_template("index.html")
+
+@app.route('/note/<int:id>')
+def note(id):
+    note = Note.query.filter_by(id=id).one()
+
+    return render_template("note.html", note=note)
+
+@app.route('/notes')
+def notes():
+    notes = Note.query.order_by(Note.date_created.desc()).all()
+
+    return render_template("notes.html", notes=notes)
+
+@app.route('/add_note', methods=["GET", "POST"])
+def add_note():
+    if request.method == "POST":
+        title = request.form['title']
+        content = request.form['content']
+        note = Note(title=title, content=content, date_created=datetime.now())
+        db.session.add(note)
+        db.session.commit()
+
+        return redirect(url_for("notes"))
+    return render_template("add_note.html")
 
 @app.route('/todo')
 def todo():
     #show all todo
     todo_list = Todo.query.all()
-    print(todo_list)
     return render_template("todo.html", todo_list=todo_list)
 
 

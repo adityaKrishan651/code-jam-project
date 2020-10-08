@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Flask App | Notes{% endblock %}
+
+{% block content%}
+
+<h1>Your Notes</h1><br>
+<a href="/add_note">Add a note</a>
+
+{% for note in notes %}
+<h4><a href="{{ url_for('note', id=note.id) }}">{{ note.title }}</a></h4>
+{% endfor %}
+
+{% endblock %}
