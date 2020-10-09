@@ -52,6 +52,13 @@ def add_note():
         return redirect(url_for("notes"))
     return render_template("add_note.html")
 
+@app.route('/delete_note/<int:id>')
+def delete_note(id):
+    note = Note.query.filter_by(id=id).first()
+    db.session.delete(note)
+    db.session.commit()
+    return redirect(url_for("notes"))
+
 @app.route('/todo')
 def todo():
     #show all todo

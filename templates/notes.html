@@ -8,7 +8,7 @@
 <a href="/add_note">Add a note</a>
 
 {% for note in notes %}
-<h4><a href="{{ url_for('note', id=note.id) }}">{{ note.title }}</a></h4>
+<h4><a href="{{ url_for('note', id=note.id) }}">{{ note.title }}</a> | <a href="{{ url_for('delete_note', id=note.id) }}" style="color: red;">Delete Note</a></h4>
 {% endfor %}
 
 {% endblock %}
