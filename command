@@ -1,1 +1,1 @@
-pyinstaller -w -F --hidden-import=pkg_resources.py2_warn app.py
+pyinstaller -w -F --add-data "templates;templates" --add-data "static;static" --hidden-import=pkg_resources.py2_warn app.py
