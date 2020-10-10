@@ -7,7 +7,7 @@
 <body>
     <h3>{{ note.title }}</h3>
     <div class="notes_area">
-      <span id="ns"><a href="#" id="e">Edit</a> | <a href="{{ url_for('delete_note', id=note.id) }}" id="d">Delete</a></span>
+      <span id="ns"><a href="{{ url_for('delete_note', id=note.id) }}" id="d">Delete</a></span>
     </div>
     <hr>
     <div class="con">
