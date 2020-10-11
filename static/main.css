@@ -48,11 +48,11 @@
     color: black;
     height: 35px;
     width: 300px;
-    border-radius: 15px;
+    border-radius: 10px;
     border: 0.5px solid black;
   }
   
-  input[type=text]:focus{
+  /* input[type=text]:focus{
     background-color: white;
     color: black;
     height: 35px;
@@ -62,7 +62,7 @@
     padding-right: 5px;
     padding-left: 5px;
   }
-  
+   */
   textarea{
     background-color: white;
     color: black;
