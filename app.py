@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 # import pkg_resources.py2_warn #will be used when we make .exe file of app.py
 from flaskwebgui import FlaskUI
 from datetime import datetime
+import tkinter as tk
+from tkinter import messagebox
+import time
 
 app = Flask(__name__)
 
@@ -23,6 +26,10 @@ class Note(db.Model):
     title = db.Column(db.String(20))
     content = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime)
+
+class Reminder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    time = db.Column(db.String(20))
 
 @app.route('/')
 def index():
@@ -88,7 +95,22 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for("todo"))
 
+@app.route('/add_reminder', methods=["POST", "GET"])
+def add_reminder():
+    if request.method == "POST":
+        hr = request.form['hr']
+        mi = request.form['mi']
+        set_time = hr + "_" + mi
+        print(set_time)
+        while True:
+            t = time.localtime()
+            ct = time.strftime("%H_%M", t)
+            if set_time == ct:
+                tk.messagebox.showinfo(title='Reminder', message='Hello')
+                break
+        return redirect(url_for("index"))
+    return render_template("reminder.html")
+
 
 db.create_all()
 ui.run()
-    
