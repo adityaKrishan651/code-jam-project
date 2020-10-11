@@ -24,6 +24,11 @@ class Note(db.Model):
     content = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime)
 
+class Reminder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    time = db.Column(db.String(20))
+    work = db.Column(db.String(40))
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -88,6 +93,24 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for("todo"))
 
+@app.route('/add_reminder', methods=["POST", "GET"])
+def add_reminder():
+    reminders = Reminder.query.all()
+    if request.method == "POST":
+        work = request.form["work"]
+        time = request.form["time"]
+        reminder = Reminder(time=time, work=work)
+        db.session.add(reminder)
+        db.session.commit()
+        return redirect(url_for("add_reminder"))
+    return render_template("reminder.html", reminders=reminders)
+
+@app.route('/delete_reminder/<int:id>')
+def delete_reminder(id):
+    reminder = Reminder.query.filter_by(id=id).first()
+    db.session.delete(reminder)
+    db.session.commit()
+    return redirect(url_for("add_reminder"))
 
 db.create_all()
 ui.run()
