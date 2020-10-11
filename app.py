@@ -27,10 +27,6 @@ class Note(db.Model):
     content = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime)
 
-class Reminder(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.String(20))
-
 @app.route('/')
 def index():
     return render_template("index.html")
