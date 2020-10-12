@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 # import pkg_resources.py2_warn #will be used when we make .exe file of app.py
 from flaskwebgui import FlaskUI
 from datetime import datetime
+from win10toast import ToastNotifier
+
+toaster = ToastNotifier()
 
 app = Flask(__name__)
 
@@ -100,6 +103,7 @@ def add_reminder():
         work = request.form["work"]
         time = request.form["time"]
         reminder = Reminder(time=time, work=work)
+        toaster.show_toast(f"Reminder for {work}", f"You have to do {work} by {time} today!")
         db.session.add(reminder)
         db.session.commit()
         return redirect(url_for("add_reminder"))
