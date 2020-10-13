@@ -116,5 +116,10 @@ def delete_reminder(id):
     db.session.commit()
     return redirect(url_for("add_reminder"))
 
+@app.route('/cal')
+def cal():
+    return render_template("calculator.html")
+
 db.create_all()
-ui.run()
+# ui.run()
+app.run(debug=True)
