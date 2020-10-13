@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flaskwebgui import FlaskUI
 from datetime import datetime
 from win10toast import ToastNotifier
+import random
 
 toaster = ToastNotifier()
 
@@ -120,6 +121,13 @@ def delete_reminder(id):
 def cal():
     return render_template("calculator.html")
 
+@app.route('/quote')
+def quote():
+    with open("quotes.txt", "r") as q:
+        q = q.readlines()
+        q = random.choice(q)
+    return render_template("quote.html", quote=q)
+
 db.create_all()
-# ui.run()
+ui.run()
 app.run(debug=True)
