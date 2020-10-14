@@ -139,15 +139,15 @@ def quote():
 
 @app.route('/upload', methods=["POST", "GET"])
 def upload():
+    files = File.query.all()
     if request.method == "POST":
         filename = all.save(request.files['file'])
         path = "uploads/" + filename
         files = File(file_name=filename, path=path)
         db.session.add(files)
         db.session.commit()
-        files = File.query.all()
         return render_template("upload.html", files=files)
-    return render_template("upload.html")
+    return render_template("upload.html", files=files)
 
 @app.route('/download/<int:id>', methods=['GET', 'POST'])
 def download(id):
