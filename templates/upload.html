@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Flask App | File Upload{% endblock %}
+
+{% block content%}
+
+<h1>Your Files</h1>
+    <p></p>
+    <form action="/upload" method="POST" enctype=multipart/form-data style="margin: 20px;">
+        <p><input type=file name=file>
+           <input type=submit value=Upload>
+      </form>
+    <h3></h3>
+    <div class="notes_area">
+    {% for file in files %}
+      <span id="ns">{{ file.id }} | {{ file.file_name }} | <a href="{{ url_for('download', id=file.id) }}" class="dni">Download</a></span><br>
+      <p></p>
+    {% endfor %}
+    </div>
+
+{% endblock %}

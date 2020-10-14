@@ -1,10 +1,11 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, send_file, request
 from flask_sqlalchemy import SQLAlchemy
 # import pkg_resources.py2_warn #will be used when we make .exe file of app.py
 from flaskwebgui import FlaskUI
 from datetime import datetime
 from win10toast import ToastNotifier
 import random
+from flask_uploads import UploadSet, configure_uploads, ALL
 
 toaster = ToastNotifier()
 
@@ -12,9 +13,12 @@ app = Flask(__name__)
 
 ui = FlaskUI(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+all = UploadSet(name='files', extensions=('txt', 'rtf', 'odf', 'ods', 'gnumeric', 'abw', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp', 'csv', 'ini', 'json', 'plist', 'xml', 'yaml', 'yml', 'pdf'))
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///datebase.db"
+app.config['UPLOADED_FILES_DEST'] = 'uploads'
 db = SQLAlchemy(app)
+configure_uploads(app, all)
 
 
 class Todo(db.Model):
@@ -32,6 +36,11 @@ class Reminder(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     time = db.Column(db.String(20))
     work = db.Column(db.String(40))
+
+class File(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    file_name = db.Column(db.String(50))
+    path = db.Column(db.String(20))
 
 @app.route('/')
 def index():
@@ -128,6 +137,24 @@ def quote():
         q = random.choice(q)
     return render_template("quote.html", quote=q)
 
+@app.route('/upload', methods=["POST", "GET"])
+def upload():
+    if request.method == "POST":
+        filename = all.save(request.files['file'])
+        path = "uploads/" + filename
+        files = File(file_name=filename, path=path)
+        db.session.add(files)
+        db.session.commit()
+        files = File.query.all()
+        return render_template("upload.html", files=files)
+    return render_template("upload.html")
+
+@app.route('/download/<int:id>', methods=['GET', 'POST'])
+def download(id):
+    file_ = File.query.get_or_404(id)
+
+    return send_file(file_.path, as_attachment=True, attachment_filename=file_.file_name)
+
 db.create_all()
-ui.run()
-# app.run(debug=True)
+# ui.run()
+app.run(debug=True)
