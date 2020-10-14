@@ -156,5 +156,5 @@ def download(id):
     return send_file(file_.path, as_attachment=True, attachment_filename=file_.file_name)
 
 db.create_all()
-# ui.run()
-app.run(debug=True)
+ui.run()
+# app.run(debug=True)
