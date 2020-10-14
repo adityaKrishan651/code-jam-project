@@ -21,7 +21,7 @@
     height: auto;
     margin: 70px auto 0;
     overflow: hidden;
-    box-shadow: 4px 4px 4px 4px rgba(255, 251, 21, 0.829);
+    box-shadow: 4px 4px 4px 4px #ff0084;
   }
   
   .calculator span {

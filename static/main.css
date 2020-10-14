@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 *{
   background-color: #0f0f0f;
-  color: yellow;
+  color: #ff0084;
   font-family: 'Noto Sans JP', sans-serif;
 }
 
@@ -29,7 +29,7 @@ h3{
   /* font-weight: bold; */
   border-radius: 10px;
   margin-top: 5px;
-  border: 0.5px solid yellow;
+  border: 0.5px solid #ff0084;
   width: 700px;
 }
 
@@ -37,12 +37,12 @@ input[type=submit]{
   font-weight: bold;
   border-radius: 10px;
   margin-top: 5px;
-  border: 0.5px solid yellow;
+  border: 0.5px solid #ff0084;
 }
 
 .btn-2{
   background-color: #0f0f0f;
-  color: yellow;
+  color: #ff0084;
 }
 
 input[type=text]{
@@ -51,7 +51,7 @@ input[type=text]{
   height: 35px;
   width: 300px;
   border-radius: 10px;
-  border: 0.5px solid yellow;
+  border: 0.5px solid #ff0084;
   padding: 15px;
 }
 
@@ -61,7 +61,7 @@ textarea{
   height: 300px;
   width: 700px;
   border-radius: 10px;
-  border: 0.5px solid yellow;
+  border: 0.5px solid #ff0084;
   padding: 15px;
 }
 
@@ -75,7 +75,7 @@ textarea:focus{
 .btn-1 {
   border-radius: 50%;
   background-color: #0f0f0f;
-  color: yellow;
+  color: #ff0084;
   padding: 5px 10px;
 }
 
