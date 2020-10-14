@@ -129,5 +129,5 @@ def quote():
     return render_template("quote.html", quote=q)
 
 db.create_all()
-# ui.run()
-app.run(debug=True)
+ui.run()
+# app.run(debug=True)
