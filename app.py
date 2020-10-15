@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 ui = FlaskUI(app)
 
-all = UploadSet(name='files', extensions=('txt', 'rtf', 'odf', 'ods', 'gnumeric', 'abw', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp', 'csv', 'ini', 'json', 'plist', 'xml', 'yaml', 'yml', 'pdf'))
+all = UploadSet(name='files', extensions=('txt', '.py', 'rtf', 'odf', 'ods', 'gnumeric', 'abw', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp', 'csv', 'ini', 'json', 'plist', 'xml', 'yaml', 'yml', 'pdf'))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///datebase.db"
 app.config['UPLOADED_FILES_DEST'] = 'uploads'
@@ -125,6 +125,7 @@ def upload():
         files = File(file_name=filename, path=path)
         db.session.add(files)
         db.session.commit()
+        files = File.query.all()
         return render_template("upload.html", files=files)
     return render_template("upload.html", files=files)
 
@@ -134,6 +135,10 @@ def download(id):
 
     return send_file(file_.path, as_attachment=True, attachment_filename=file_.file_name)
 
+@app.route('/calendar')
+def calendar():
+    return render_template("calendar.html")
+
 db.create_all()
-ui.run()
-# app.run(debug=True)
+# ui.run()
+app.run(debug=True)
