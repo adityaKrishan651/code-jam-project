@@ -24,6 +24,7 @@ configure_uploads(app, all)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(200))
+    time = db.Column(db.String(20))
     complete = db.Column(db.Boolean)
 
 class Note(db.Model):
@@ -32,10 +33,6 @@ class Note(db.Model):
     content = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime)
 
-class Reminder(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.String(20))
-    work = db.Column(db.String(40))
 
 class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -86,8 +83,10 @@ def todo():
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
-    task = request.form.get("task")
-    new_todo = Todo(task=task, complete=False)
+    task = request.form["task"]
+    time = request.form["time"]
+    new_todo = Todo(task=task, time=time, complete=False)
+    toaster.show_toast(f"Reminder for {task}", f"You have to do {task} by {time} today!")
     db.session.add(new_todo)
     db.session.commit()
     return redirect(url_for("todo"))
@@ -105,26 +104,6 @@ def delete(todo_id):
     db.session.delete(todo)
     db.session.commit()
     return redirect(url_for("todo"))
-
-@app.route('/add_reminder', methods=["POST", "GET"])
-def add_reminder():
-    reminders = Reminder.query.all()
-    if request.method == "POST":
-        work = request.form["work"]
-        time = request.form["time"]
-        reminder = Reminder(time=time, work=work)
-        toaster.show_toast(f"Reminder for {work}", f"You have to do {work} by {time} today!")
-        db.session.add(reminder)
-        db.session.commit()
-        return redirect(url_for("add_reminder"))
-    return render_template("reminder.html", reminders=reminders)
-
-@app.route('/delete_reminder/<int:id>')
-def delete_reminder(id):
-    reminder = Reminder.query.filter_by(id=id).first()
-    db.session.delete(reminder)
-    db.session.commit()
-    return redirect(url_for("add_reminder"))
 
 @app.route('/cal')
 def cal():
