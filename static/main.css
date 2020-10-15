@@ -26,7 +26,7 @@ h3{
 }
 
 #hello{
-  /* font-weight: bold; */
+  font-weight: bold;
   border-radius: 10px;
   margin-top: 5px;
   border: 0.5px solid #ff0084;
@@ -34,8 +34,8 @@ h3{
 }
 
 input[type=submit]{
-  font-weight: bold;
-  border-radius: 10px;
+  /* font-weight: bold; */
+  border-radius: 5px;
   margin-top: 5px;
   border: 0.5px solid #ff0084;
 }
@@ -111,7 +111,7 @@ label{
 
 #an{
   margin: 20px;
-  /* font-weight: bold; */
+  font-weight: bold;
 }
 
 #an a{
@@ -168,7 +168,7 @@ p{
   padding: 5px;
   border-radius: 4px;
   margin: 2px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .nd{
@@ -178,7 +178,7 @@ p{
   padding: 5px;
   border-radius: 4px;
   margin: 2px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .q{
