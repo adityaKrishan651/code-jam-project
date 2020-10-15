@@ -2,17 +2,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #0f0f0f;
+    /* background-color: white; */
   }
 
   body{
-    background-color: #0f0f0f;
+    background-color: white;
   }
   
   html {
     font-family: "Roboto", "Noto Sans", "Helvetica", sans-serif;
     font-size: 14px;
-    /* background-color: #0f0f0f; */
+    /* background-color: white; */
     height: 100%;
   }
   
@@ -21,7 +21,7 @@
     height: auto;
     margin: 70px auto 0;
     overflow: hidden;
-    box-shadow: 4px 4px 4px 4px #ff0084;
+    box-shadow: 4px 4px 4px 4px black;
   }
   
   .calculator span {
@@ -32,7 +32,7 @@
   .top {
     position: relative;
     height: 150px;
-    background-color: #0f0f0f;
+    background-color: white;
   }
   
   .top .unit {
@@ -41,7 +41,7 @@
     top: 10px;
     left: 10px;
     font-weight: 700;
-    color: white;
+    color: black;
   }
   
   .top .screen {
@@ -61,21 +61,21 @@
   }
   
   .screen .input {
-    color: white;
+    color: black;
     height: 60%;
     font-size: 35px;
   }
   
   .screen .result {
-    color: white;
+    color: black;
     font-size: 20px;
     height: 40%;
   }
   
   .bottom {
-    background-color: #2D2D2D;
+    background-color: white;
     height: 300px;
-    color: #fff;
+    color: black;
     cursor: pointer;
   }
   
@@ -126,7 +126,7 @@
   .operators {
     width: 20%;
     font-size: 18px;
-    background-color: #434343;
+    background-color: white;
   }
   
   .delete {

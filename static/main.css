@@ -1,10 +1,10 @@
 *{
-  /* background-color: #0f0f0f; */
-  color: #00f7ff;
+  /* background-color: white; */
+  color: black;
 }
 
 body{
-  background-color: #0f0f0f;
+  background-color: white;
 }
 
 .dropdown{
@@ -24,10 +24,10 @@ h3{
 }
 
 #hello{
-  font-weight: bold;
+  /* font-weight: bold; */
   border-radius: 10px;
   margin-top: 5px;
-  border: 0.5px solid #00f7ff;
+  border: 0.5px solid black;
   width: 700px;
 }
 
@@ -35,31 +35,31 @@ input[type=submit]{
   /* font-weight: bold; */
   border-radius: 5px;
   margin-top: 5px;
-  border: 0.5px solid #00f7ff;
+  border: 0.5px solid black;
 }
 
 .btn-2{
-  background-color: #0f0f0f;
-  color: #00f7ff;
+  background-color: white;
+  color: black;
 }
 
 input[type=text]{
-  background-color: #0f0f0f;
-  color: white;
+  background-color: white;
+  color: black;
   height: 35px;
   width: 300px;
   border-radius: 10px;
-  border: 0.5px solid #00f7ff;
+  border: 0.5px solid black;
   padding: 15px;
 }
 
 textarea{
-  background-color: #0f0f0f;
-  color: white;
+  background-color: white;
+  color: black;
   height: 300px;
   width: 700px;
   border-radius: 10px;
-  border: 0.5px solid #00f7ff;
+  border: 0.5px solid black;
   padding: 15px;
 }
 
@@ -72,8 +72,8 @@ textarea:focus{
 
 .btn-1 {
   border-radius: 50%;
-  background-color: #0f0f0f;
-  color: #00f7ff;
+  background-color: white;
+  color: black;
   padding: 5px 10px;
 }
 
@@ -99,7 +99,7 @@ label{
 
 
 #d{
-  color: white;
+  color: black;
   background-color: red;
   text-decoration: none;
   padding: 5px;
@@ -109,7 +109,7 @@ label{
 
 #an{
   margin: 20px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 #an a{
@@ -117,6 +117,13 @@ label{
   color: white;
   padding: 5px;
   border-radius: 5px
+}
+
+#an a:hover{
+  background: #1c8f3c;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 #e{
@@ -134,7 +141,7 @@ a{
 
 #ns{
   margin: 20px;
-  color: white;
+  color: black;
 }
 
 #ns a{
@@ -143,7 +150,7 @@ a{
 
 #ns a:hover {
   color: white;
-  text-decoration: underline;
+  /* background-color: rgb(211, 17, 17); */
 }
 
 .con{
@@ -152,15 +159,15 @@ a{
 }
 
 p{
-  color: white;
+  color: black;
 }
 
 #task{
-  color: white;
+  color: black;
 }
 
 .dni{
-  color: white;
+  color: black;
   background-color: rgb(5, 175, 5);
   text-decoration: none;
   padding: 5px;
@@ -170,7 +177,7 @@ p{
 }
 
 .nd{
-  color: white;
+  color: black;
   background-color: grey;
   text-decoration: none;
   padding: 5px;
