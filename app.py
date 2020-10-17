@@ -69,7 +69,7 @@ def add_note():
 
 @app.route('/delete_note/<int:id>')
 def delete_note(id):
-    note = Note.query.filter_by(id=id).first()
+    note = Note.query.get_or_404(id)
     db.session.delete(note)
     db.session.commit()
     return redirect(url_for("notes"))
