@@ -125,7 +125,6 @@ def upload():
         files = File(file_name=filename, path=path)
         db.session.add(files)
         db.session.commit()
-        files = File.query.all()
         return render_template("upload.html", files=files)
     return render_template("upload.html", files=files)
 
