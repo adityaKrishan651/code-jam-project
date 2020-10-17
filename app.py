@@ -91,16 +91,16 @@ def add():
     db.session.commit()
     return redirect(url_for("todo"))
 
-@app.route('/update/<int:todo_id>')
-def update(todo_id):
-    todo = Todo.query.filter_by(id=todo_id).first()
+@app.route('/update/<int:id>')
+def update(id):
+    todo = Todo.query.get_or_404(id)
     todo.complete = not todo.complete
     db.session.commit()
     return redirect(url_for("todo"))
 
-@app.route('/delete/<int:todo_id>')
-def delete(todo_id):
-    todo = Todo.query.filter_by(id=todo_id).first()
+@app.route('/delete/<int:id>')
+def delete(id):
+    todo = Todo.query.get_or_404(id)
     db.session.delete(todo)
     db.session.commit()
     return redirect(url_for("todo"))
