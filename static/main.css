@@ -1,10 +1,10 @@
 *{
-  /* background-color: white; */
-  color: white;
+  /* background-color: #f44c7f; */
+  color: #f44c7f;
 }
 
 body{
-  background-color: black;
+  background-color: #333a45;
 }
 
 .dropdown{
@@ -27,7 +27,7 @@ h3{
   /* font-weight: bold; */
   border-radius: 10px;
   margin-top: 5px;
-  border: 0.5px solid white;
+  border: 0.5px solid #f44c7f;
   width: 700px;
 }
 
@@ -35,33 +35,33 @@ input[type=submit]{
   /* font-weight: bold; */
   border-radius: 5px;
   margin-top: 5px;
-  border: 0.5px solid white;
-  color: white;
-  background-color: black;
+  border: 0.5px solid #f44c7f;
+  color: #f44c7f;
+  background-color: #333a45;
 }
 
 .btn-2{
-  background-color: black;
-  color: white;
+  background-color: #333a45;
+  color: #f44c7f;
 }
 
 input[type=text]{
-  background-color: black;
+  background-color: #333a45;
   color: white;
   height: 35px;
   width: 300px;
   border-radius: 10px;
-  border: 0.5px solid white;
+  border: 0.5px solid #f44c7f;
   padding: 15px;
 }
 
 textarea{
-  background-color: black;
+  background-color: #333a45;
   color: white;
   height: 300px;
   width: 700px;
   border-radius: 10px;
-  border: 0.5px solid white;
+  border: 0.5px solid #f44c7f;
   padding: 15px;
 }
 
@@ -74,7 +74,7 @@ textarea:focus{
 
 .btn-1 {
   border-radius: 50%;
-  background-color: black;
+  background-color: #333a45;
   color: white;
   padding: 5px 10px;
 }
@@ -129,7 +129,7 @@ label{
 }
 
 #e{
-  color: white;
+  color: #f44c7f;
   background-color: orange;
   text-decoration: none;
   padding: 3px 7px;

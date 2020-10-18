@@ -6,7 +6,7 @@
   }
 
   body{
-    background-color: black;
+    background-color: #333a45;
   }
   
   html {
@@ -21,7 +21,7 @@
     height: auto;
     margin: 70px auto 0;
     overflow: hidden;
-    box-shadow: 4px 4px 4px 4px rgb(255, 0, 255);
+    box-shadow: 4px 4px 4px 4px #f44c7f;
   }
   
   .calculator span {
@@ -32,7 +32,7 @@
   .top {
     position: relative;
     height: 150px;
-    background-color: black;
+    background-color: #333a45;
   }
   
   .top .unit {
@@ -73,7 +73,7 @@
   }
   
   .bottom {
-    background-color: black;
+    background-color: #333a45;
     height: 300px;
     color: white;
     cursor: pointer;
@@ -126,7 +126,7 @@
   .operators {
     width: 20%;
     font-size: 18px;
-    background-color: black;
+    background-color: #333a45;
   }
   
   .delete {

@@ -134,6 +134,10 @@ def download(id):
 
     return send_file(file_.path, as_attachment=True, attachment_filename=file_.file_name)
 
+@app.route('/clock')
+def clock():
+    return render_template("clock.html")
+
 db.create_all()
 # ui.run()
 app.run(debug=True)
