@@ -192,3 +192,36 @@ p{
 .q{
   margin: 20px;
 }
+
+#th{
+  margin: 20px;
+}
+
+#th a{
+  color: white;
+  border-bottom: 1px dotted white;
+}
+
+#th a:hover{
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+code{
+  color: rgb(0, 253, 42);
+  font-size: 20px;
+}
+
+p{
+  font-size: 20px;
+}
+
+h3 a{
+  color: #f44c7f;
+  border-bottom: 1px dotted #f44c7f;
+}
+
+h3 a:hover {
+  color: #f44c7f;
+  border-bottom: 1px solid #f44c7f;
+}
