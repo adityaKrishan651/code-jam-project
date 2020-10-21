@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 ui = FlaskUI(app)
 
-all = UploadSet(name='files', extensions=('txt', '.py', 'rtf', 'odf', 'ods', 'gnumeric', 'abw', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp', 'csv', 'ini', 'json', 'plist', 'xml', 'yaml', 'yml', 'pdf'))
+all = UploadSet(name='files', extensions=('txt', 'py', 'rtf', 'odf', 'ods', 'gnumeric', 'abw', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp', 'csv', 'ini', 'json', 'plist', 'xml', 'yaml', 'yml', 'pdf'))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///datebase.db"
 app.config['UPLOADED_FILES_DEST'] = 'uploads'
