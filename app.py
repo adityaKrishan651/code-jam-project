@@ -50,22 +50,36 @@ class File(db.Model):
 
 @app.route('/')
 def index():
+    '''
+    index route
+    '''
     return render_template("index.html")
 
 @app.route('/note/<int:id>')
 def note(id):
+    '''
+    note route
+    query a particular note
+    '''
     note = Note.query.filter_by(id=id).one()
 
     return render_template("note.html", note=note)
 
 @app.route('/notes')
 def notes():
+    '''
+    notes route
+    query all notes
+    '''
     notes = Note.query.order_by(Note.date_created.desc()).all()
 
     return render_template("notes.html", notes=notes)
 
 @app.route('/add_note', methods=["GET", "POST"])
 def add_note():
+    '''
+    add note route
+    '''
     if request.method == "POST":
         title = request.form['title']
         content = request.form['content']
@@ -78,6 +92,9 @@ def add_note():
 
 @app.route('/delete_note/<int:id>')
 def delete_note(id):
+    '''
+    delete note route
+    '''
     note = Note.query.get_or_404(id)
     db.session.delete(note)
     db.session.commit()
@@ -85,13 +102,19 @@ def delete_note(id):
 
 @app.route('/todo')
 def todo():
-    #show all todo
+    '''
+    todo route
+    query all todo
+    '''
     todo_list = Todo.query.all()
     return render_template("todo.html", todo_list=todo_list)
 
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
+    '''
+    add todo note
+    '''
     task = request.form["task"]
     time = request.form["time"]
     new_todo = Todo(task=task, time=time, complete=False)
@@ -102,6 +125,9 @@ def add():
 
 @app.route('/update/<int:id>')
 def update(id):
+    '''
+    update todo route
+    '''
     todo = Todo.query.get_or_404(id)
     todo.complete = not todo.complete
     db.session.commit()
@@ -109,6 +135,9 @@ def update(id):
 
 @app.route('/delete/<int:id>')
 def delete(id):
+    '''
+    delete todo route
+    '''
     todo = Todo.query.get_or_404(id)
     db.session.delete(todo)
     db.session.commit()
@@ -116,10 +145,16 @@ def delete(id):
 
 @app.route('/cal')
 def cal():
+    '''
+    calculator route
+    '''
     return render_template("calculator.html")
 
 @app.route('/quote')
 def quote():
+    '''
+    quote of the day  route
+    '''
     with open("quotes.txt", "r") as q:
         q = q.readlines()
         q = random.choice(q)
@@ -127,6 +162,10 @@ def quote():
 
 @app.route('/upload', methods=["POST", "GET"])
 def upload():
+    '''
+    file upload route
+    query all files
+    '''
     files = File.query.all()
     if request.method == "POST":
         filename = all.save(request.files['file'])
@@ -140,12 +179,18 @@ def upload():
 
 @app.route('/download/<int:id>', methods=['GET', 'POST'])
 def download(id):
+    '''
+    download files route
+    '''
     file_ = File.query.get_or_404(id)
 
     return send_file(file_.path, as_attachment=True, attachment_filename=file_.file_name)
 
 @app.route('/clock')
 def clock():
+    '''
+    clock route
+    '''
     return render_template("clock.html")
 
 db.create_all()
