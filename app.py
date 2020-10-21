@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flaskwebgui import FlaskUI 
 from win10toast import ToastNotifier
 from flask_uploads import UploadSet, configure_uploads, ALL
+from requests import get as request_get
+
 
 toaster = ToastNotifier()
 
@@ -155,10 +157,19 @@ def quote():
     '''
     quote of the day  route
     '''
-    with open("quotes.txt", "r") as q:
-        q = q.readlines()
-        q = random.choice(q)
-    return render_template("quote.html", quote=q)
+    url = "https://type.fit/api/quotes"
+    with request_get(url) as response:
+        final_quote = ""
+        if response.ok:
+            data = response.json()
+            quote = random.choice(data)
+            final_quote = f"{quote['text']}\n-{quote['author']}"
+        else:
+            with open("quotes.txt", "r") as q:
+                q = q.readlines()
+                q = random.choice(q)
+                final_quote = q
+        return render_template("quote.html", quote=final_quote)
 
 @app.route('/upload', methods=["POST", "GET"])
 def upload():
