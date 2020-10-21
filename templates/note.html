@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}Flask App | {{ note.title }} {% endblock %}
+{% block title %}Student Kit | {{ note.title }} {% endblock %}
 
 {% block content%}
 
-<h2>{{ note.title }}</h2>
+<body>
+    <h3>{{ note.title }}</h3>
+    <div class="notes_area">
+      <span id="ns"><a href="{{ url_for('delete_note', id=note.id) }}" id="d">Delete</a></span>
+    </div>
+    <hr>
+    <div class="con">
+      <p>{{ note.content }}</p>
+    </div>
 
-<p>{{ note.content }}</p>
+
 
 {% endblock %}

@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+*{
+  /* background-color: #f44c7f; */
+  color: #f44c7f;
+  font-family: 'Roboto', sans-serif;
+}
+
+body{
+  background-color: #333a45;
+}
+
+.dropdown{
+  padding: 20px 30px;
+}
+
+h1{
+  padding: 20px;
+}
+
+h3{
+  padding: 20px;
+}
+
+.form-area{
+  text-align: center;
+}
+
+#hello{
+  /* font-weight: bold; */
+  border-radius: 10px;
+  margin-top: 5px;
+  border: 0.5px solid #f44c7f;
+  width: 700px;
+}
+
+input[type=submit]{
+  /* font-weight: bold; */
+  border-radius: 5px;
+  margin-top: 5px;
+  border: 0.5px solid #f44c7f;
+  color: #f44c7f;
+  background-color: #333a45;
+}
+
+.btn-2{
+  background-color: #333a45;
+  color: #f44c7f;
+}
+
+input[type=text]{
+  background-color: #333a45;
+  color: white;
+  height: 35px;
+  width: 300px;
+  border-radius: 10px;
+  border: 0.5px solid #f44c7f;
+  padding: 15px;
+}
+
+textarea{
+  background-color: #333a45;
+  color: white;
+  height: 300px;
+  width: 700px;
+  border-radius: 10px;
+  border: 0.5px solid #f44c7f;
+  padding: 15px;
+}
+
+input:focus {
+  outline-style: none;
+}
+textarea:focus{
+  outline-style: none;
+}
+
+.btn-1 {
+  border-radius: 50%;
+  background-color: #333a45;
+  color: white;
+  padding: 5px 10px;
+}
+
+
+
+.t{
+  text-align: center;
+  margin-top: 20px;
+}
+
+label{
+  font-size: 20px;
+}
+
+#u{
+  color: white;
+  background-color: orange;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 4px;
+  margin: 2px;
+}
+
+
+#d{
+  color: white;
+  background-color: red;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 4px;
+  margin: 2px;
+}
+
+#an{
+  margin: 20px;
+  /* font-weight: bold; */
+}
+
+#an a{
+  background: #2ea44f;
+  color: white;
+  padding: 5px;
+  border-radius: 5px
+}
+
+#an a:hover{
+  background: #1c8f3c;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#e{
+  color: #f44c7f;
+  background-color: orange;
+  text-decoration: none;
+  padding: 3px 7px;
+  border-radius: 4px;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+#ns{
+  margin: 20px;
+  color: white;
+}
+
+#ns a{
+  color: white;
+}
+
+#ns a:hover {
+  color: white;
+  text-decoration: underline;
+  /* background-color: rgb(211, 17, 17); */
+}
+
+.con{
+  margin: 20px;
+  font-size: 20px;
+}
+
+p{
+  color: white;
+}
+
+#task{
+  color: white;
+}
+
+.dni{
+  color: white;
+  background-color: rgb(5, 175, 5);
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 4px;
+  margin: 2px;
+  /* font-weight: bold; */
+}
+
+.nd{
+  color: white;
+  background-color: grey;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 4px;
+  margin: 2px;
+  /* font-weight: bold; */
+}
+
+.q{
+  margin: 20px;
+}
+
+#th{
+  margin: 20px;
+}
+
+#th a{
+  color: white;
+  border-bottom: 1px dotted white;
+}
+
+#th a:hover{
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+code{
+  color: rgb(0, 253, 42);
+  font-size: 20px;
+}
+
+p{
+  font-size: 20px;
+}
+
+h3 a{
+  color: #f44c7f;
+  border-bottom: 1px dotted #f44c7f;
+}
+
+h3 a:hover {
+  color: #f44c7f;
+  border-bottom: 1px solid #f44c7f;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Student Kit | Calculator</title>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='cal.css' ) }}">
+</head>
+<body>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-expanded="false">
+      Menu
+    </button>
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+      <li><a class="dropdown-item active" href="/">Home</a></li>
+      <li><a class="dropdown-item" href="/todo">Todo List</a></li>
+      <li><a class="dropdown-item" href="/notes">Notes</a></li>
+      <li><a class="dropdown-item" href="/cal">Calculator</a></li>
+      <li><a class="dropdown-item" href="/quote">Quote of the day</a></li>
+      <li><a href="/upload" class="dropdown-item">File Upload</a></li>
+      <li><a href="/clock" class="dropdown-item">Clock</a></li>
+    </ul>
+  </div>
+  
+  <main class="calculator">
+
+    <div class="top">
+
+      <span class="unit">deg</span>
+      <section class="screen">
+        <div class="input"></div>
+        <div class="result"></div>
+      </section>
+
+    </div>
+
+    <div class="bottom">
+
+      <section class="keys">
+
+        <div class="column">
+          <span data-key="7">7</span>
+          <span data-key="4">4</span>
+          <span data-key="1">1</span>
+          <span data-key=".">.</span>
+        </div>
+
+        <div class="column">
+          <span data-key="8">8</span>
+          <span data-key="5">5</span>
+          <span data-key="2">2</span>
+          <span data-key="0">0</span>
+        </div>
+
+        <div class="column">
+          <span data-key="9">9</span>
+          <span data-key="6">6</span>
+          <span data-key="3">3</span>
+          <span class="equals-to" data-key="=">=</span>
+        </div>
+      </section>
+
+      <section class="operators">
+        <span class="delete">del</span>
+        <span data-key="÷">÷</span>
+        <span data-key="x">x</span>
+        <span data-key="-">-</span>
+        <span data-key="+">+</span>
+      </section>
+
+    </div>
+
+  </main>
+
+<script src="{{ url_for('static', filename='main.js' )}}"></script>
+</body>
+</html>

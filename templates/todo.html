@@ -1,31 +1,38 @@
 
 {% extends "base.html" %}
 
-{% block title %}Flask App | Todo List{% endblock %}
+{% block title %}Student Kit | Todo List{% endblock %}
 
 {% block content%}
-<h1>Add a Task</h1>
-    <form action="/add" method="POST" autocomplete="off">
-        <div>
-            <label for="task">Add Some Task: </label>
-            <input type="text" name="task" required><br>
-            <button style="margin-top: 10px;">Add</button>
-        </div>
-    </form>
-
-    {% for todo in todo_list %}
-    <div>
-      <p> {{ todo.id }} | {{ todo.task }} </p>
-
-        {% if todo.complete == False %}
-            <span>In Complete</span>
-        {% else %}
-            <span>Done</span>
-        {% endif %}
-
-        <a href="/update/{{ todo.id }}">Update</a>
-        <a href="/delete/{{ todo.id }}">Delete</a>
+<div class="t">
+    <h1 id="g">Todo List</h1>
+    <h3 id="g">Add Some Task Todo</h3>
     </div>
-    {% endfor %}
+    <div class="form-area">
+      <form action="/add" method="POST" autocomplete="off">
+        <label for="task">Task: </label>
+        <input type="text" name="task">
+        <p></p>
+        <label for="time">Time to do by: </label>
+        <input type="text" name="time" value="9 pm">
+        <input class="btn-1" type="submit" value="Add">
+      </form>
+      <hr>
+      <div class="task-area">
+        {% for todo in todo_list %}
+        {% if todo.complete == False %}
+            <span id="task">
+            {{ todo.id }} | {{ todo.task }} | <span class="nd">In Complete</span> | <a href="/update/{{ todo.id }}" id="u">Update</a> | <a href="/delete/{{ todo.id }}" id="d">Delete</a>
+            </span><br>
+            <p></p>
+        {% else %}
+        <span id="task">
+            {{ todo.id }} | {{ todo.task }} | <span class="dni">Done</span> | <a href="/update/{{ todo.id }}" id="u">Update</a> | <a href="/delete/{{ todo.id }}" id="d">Delete</a>
+            </span><br>
+            <p></p>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
 
 {% endblock %}

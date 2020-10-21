@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* background-color: white; */
+  }
+
+  body{
+    background-color: #333a45;
+  }
+  
+  html {
+    font-family: "Roboto", "Noto Sans", "Helvetica", sans-serif;
+    font-size: 14px;
+    /* background-color: white; */
+    height: 100%;
+  }
+  
+  .calculator {
+    width: 350px;
+    height: auto;
+    margin: 70px auto 0;
+    overflow: hidden;
+    box-shadow: 4px 4px 4px 4px #f44c7f;
+  }
+  
+  .calculator span {
+    -moz-user-select: none;
+    user-select: none;
+  }
+  
+  .top {
+    position: relative;
+    height: 150px;
+    background-color: #333a45;
+  }
+  
+  .top .unit {
+    text-transform: uppercase;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: 700;
+    color: white;
+  }
+  
+  .top .screen {
+    position: relative;
+    width: 100%;
+    top: 20%;
+    height: 80%;
+  }
+  
+  .screen > div  {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 5px;
+    text-align: right;
+  }
+  
+  .screen .input {
+    color: white;
+    height: 60%;
+    font-size: 35px;
+  }
+  
+  .screen .result {
+    color: white;
+    font-size: 20px;
+    height: 40%;
+  }
+  
+  .bottom {
+    background-color: #333a45;
+    height: 300px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .bottom section {
+    position: relative;
+    height: 100%;
+    float: left;
+    display: flex;
+  }
+  
+  .keys {
+    width: 80%;
+  }
+  
+  
+  .keys .column {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .keys .column, .operators {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .keys .column span, .operators span {
+    position: relative;
+    overflow: hidden;
+    flex-grow: 1;
+    width: 100%;
+    line-height: 1;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s;
+  }
+  
+  .keys .column span {
+    font-size: 25px;
+  }
+  
+  .keys .column span:hover, .operators span:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .operators {
+    width: 20%;
+    font-size: 18px;
+    background-color: #333a45;
+  }
+  
+  .delete {
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+.dropdown{
+    padding: 20px 30px;  
+}
