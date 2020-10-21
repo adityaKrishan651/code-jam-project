@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, send_file, request
-from flask_sqlalchemy import SQLAlchemy
-# import pkg_resources.py2_warn #will be used when we make .exe file of app.py
-from flaskwebgui import FlaskUI
-from datetime import datetime
-from win10toast import ToastNotifier
 import random
+from datetime import datetime
+from flask import Flask, render_template, redirect, url_for, send_file, request
+from flask_sqlalchemy import SQLAlchemy 
+# import pkg_resources.py2_warn #will be used when we make .exe file of app.py '''i think that we will not make an .exe'''
+from flaskwebgui import FlaskUI 
+from win10toast import ToastNotifier
 from flask_uploads import UploadSet, configure_uploads, ALL
 
 toaster = ToastNotifier()
@@ -22,12 +22,18 @@ configure_uploads(app, all)
 
 
 class Todo(db.Model):
+    '''
+    todo table in database
+    '''
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(200))
     time = db.Column(db.String(20))
     complete = db.Column(db.Boolean)
 
 class Note(db.Model):
+    '''
+    note table in database
+    '''
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(20))
     content = db.Column(db.String(1000))
@@ -35,6 +41,9 @@ class Note(db.Model):
 
 
 class File(db.Model):
+    '''
+    file table in database
+    '''
     id = db.Column(db.Integer, primary_key=True)
     file_name = db.Column(db.String(50))
     path = db.Column(db.String(20))
@@ -141,3 +150,4 @@ def clock():
 
 db.create_all()
 ui.run()
+
