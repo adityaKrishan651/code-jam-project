@@ -1,6 +1,20 @@
 # Student Kit
 
-Student Kit is a Desktop/Browser based application made using python flask made for timathon that runs on your local host it has many features like todo list, notes, calculator, clock and a file uploading system where you can upload a file and download it later if you want. This app is made by UnNamed Team. `None` that is me has done the backend and the UI of the app, `aditya._.krishan` has made the calendar and calculator, `Koro Sensei` has guided us.
+We made a simple application that consists of some of the basic necessities of a student that are:
+
+ - A todo list
+
+ - Maintaining notes
+
+ - Marking events on the calendar
+
+ - Saving up important document and files
+
+    
+
+    All combined in a simple application.
+
+    Hope you like it :)
 
 ## How To Run
 

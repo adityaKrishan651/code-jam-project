@@ -7,6 +7,10 @@ from flaskwebgui import FlaskUI
 from win10toast import ToastNotifier
 from flask_uploads import UploadSet, configure_uploads, ALL
 from requests import get as request_get
+<<<<<<< HEAD
+=======
+
+>>>>>>> c16a6200a2848d1470118674199ec560871b313a
 
 toaster = ToastNotifier()
 
