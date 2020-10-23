@@ -27,7 +27,7 @@ h3{
 
 #hello{
   /* font-weight: bold; */
-  border-radius: 10px;
+  border-radius: 5px;
   margin-top: 5px;
   border: 0.5px solid #f44c7f;
   width: 700px;
@@ -66,6 +66,15 @@ input[type=submit]{
 .btn-2{
   background-color: #333a45;
   color: #f44c7f;
+  margin-right: 620px;
+  transition: all 0.3s ease;
+}
+
+.btn-2:hover {
+  background-color: #333a45;
+  color: #f44c7f;
+  margin-right: 620px;
+  box-shadow: 2px 2px #f44c7f;
 }
 
 input[type=text]{
@@ -84,9 +93,10 @@ textarea{
   color: white;
   height: 300px;
   width: 700px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 0.5px solid #f44c7f;
   padding: 15px;
+  transition: all 0.3s ease;
 }
 
 input:focus {
@@ -95,6 +105,7 @@ input:focus {
 }
 textarea:focus{
   outline-style: none;
+  box-shadow: 2px 2px #f44c7f;
 }
 
 
