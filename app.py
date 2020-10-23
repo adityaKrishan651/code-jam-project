@@ -29,7 +29,6 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(200))
     time = db.Column(db.String(20))
-    complete = db.Column(db.Boolean)
 
 class Note(db.Model):
     '''
@@ -118,19 +117,9 @@ def add():
     '''
     task = request.form["task"]
     time = request.form["time"]
-    new_todo = Todo(task=task, time=time, complete=False)
+    new_todo = Todo(task=task, time=time)
     toaster.show_toast(f"Reminder for {task}", f"You have to do {task} by {time} today!")
     db.session.add(new_todo)
-    db.session.commit()
-    return redirect(url_for("todo"))
-
-@app.route('/update/<int:id>')
-def update(id):
-    '''
-    update todo route
-    '''
-    todo = Todo.query.get_or_404(id)
-    todo.complete = not todo.complete
     db.session.commit()
     return redirect(url_for("todo"))
 
