@@ -5,32 +5,24 @@
 
 {% block content%}
 <div class="t">
-    <h1 id="g">Todo List</h1>
     <h3 id="g">Add Some Task Todo</h3>
     </div>
     <div class="form-area">
       <form action="/add" method="POST" autocomplete="off">
         <label for="task">Task: </label>
-        <input type="text" name="task">
+        <input type="text" name="task" required>
         <p></p>
-        <label for="time">Time to do by: </label>
-        <input type="text" name="time" value="9 pm">
-        <input class="btn-1" type="submit" value="Add">
+        <label for="time">Time: </label>
+        <input type="text" name="time" value="9 pm" required><br>
+        <input style="margin-right: 190px;" class="btn-1" id="ayy" type="submit" value="Add">
       </form>
       <hr>
       <div class="task-area">
         {% for todo in todo_list %}
-        {% if todo.complete == False %}
             <span id="task">
-            {{ todo.id }} | {{ todo.task }} | <span class="nd">In Complete</span> | <a href="/update/{{ todo.id }}" id="u">Update</a> | <a href="/delete/{{ todo.id }}" id="d">Delete</a>
+            {{ todo.id }} | {{ todo.task }} | <a href="/delete/{{ todo.id }}" id="d">✖</a>
             </span><br>
             <p></p>
-        {% else %}
-        <span id="task">
-            {{ todo.id }} | {{ todo.task }} | <span class="dni">Done</span> | <a href="/update/{{ todo.id }}" id="u">Update</a> | <a href="/delete/{{ todo.id }}" id="d">Delete</a>
-            </span><br>
-            <p></p>
-        {% endif %}
         {% endfor %}
       </div>
     </div>

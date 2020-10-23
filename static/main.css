@@ -33,6 +33,27 @@ h3{
   width: 700px;
 }
 
+#ayy{
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 0.5px solid #f44c7f;
+  color: #f44c7f;
+  background-color: #333a45;
+  width: 50px;
+  transition: all 0.3s ease;
+}
+
+#ayy:hover {
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 0.5px solid #f44c7f;
+  color: #f44c7f;
+  background-color: #333a45;
+  width: 50px;
+  box-shadow: 2px 2px #f44c7f;
+}
+
+
 input[type=submit]{
   /* font-weight: bold; */
   border-radius: 5px;
@@ -52,9 +73,10 @@ input[type=text]{
   color: white;
   height: 35px;
   width: 300px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 0.5px solid #f44c7f;
   padding: 15px;
+  transition: all 0.3s ease;
 }
 
 textarea{
@@ -69,16 +91,10 @@ textarea{
 
 input:focus {
   outline-style: none;
+  box-shadow: 2px 2px #f44c7f;
 }
 textarea:focus{
   outline-style: none;
-}
-
-.btn-1 {
-  border-radius: 50%;
-  background-color: #333a45;
-  color: white;
-  padding: 5px 10px;
 }
 
 
@@ -93,7 +109,7 @@ label{
 }
 
 #u{
-  color: white;
+  color: black;
   background-color: orange;
   text-decoration: none;
   padding: 5px;
@@ -102,13 +118,26 @@ label{
 }
 
 
+
 #d{
   color: white;
-  background-color: red;
+  background-color: #363636;
   text-decoration: none;
   padding: 5px;
   border-radius: 4px;
   margin: 2px;
+  transition: background-color 0.3s ease;
+}
+
+#d:hover {
+  color: white;
+  background-color: #ff0000;
+  /* background-color: red; */
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 4px;
+  margin: 2px;
+  box-shadow: 2px 2px #5c5c5c;
 }
 
 #an{
@@ -172,7 +201,7 @@ p{
 }
 
 .dni{
-  color: white;
+  color: black;
   background-color: rgb(5, 175, 5);
   text-decoration: none;
   padding: 5px;
@@ -182,7 +211,7 @@ p{
 }
 
 .nd{
-  color: white;
+  color: black;
   background-color: grey;
   text-decoration: none;
   padding: 5px;
