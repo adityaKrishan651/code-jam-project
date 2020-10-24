@@ -192,7 +192,6 @@ def clock():
     '''
     return render_template("clock.html")
 
-db.create_all()
-#ui.run()
-app.run(debug=True)
 
+if __name__ == "__main__":
+    app.run(debug=True)
