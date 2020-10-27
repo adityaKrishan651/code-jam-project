@@ -185,6 +185,17 @@ def download(id):
 
     return send_file(file_.path, as_attachment=True, attachment_filename=file_.file_name)
 
+@app.route('/delete_f/<int:id>')
+def delete_f(id):
+    '''
+    delete uploaded file
+    '''
+    file_ = File.query.get_or_404(id)
+    db.session.delete(file_)
+    db.session.commit()
+
+    return redirect(url_for("upload"))
+
 @app.route('/clock')
 def clock():
     '''
