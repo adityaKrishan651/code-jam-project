@@ -1,6 +1,6 @@
 # Student Kit
 
-We made a simple application that consists of some of the basic necessities of a student that are:
+We made a simple application Desktop that consists of some of the basic necessities of a student that are:
 
  - A todo list
 
@@ -16,12 +16,10 @@ We made a simple application that consists of some of the basic necessities of a
 
     Hope you like it :)
 
-## How To Run
+## How To Run (READ THIS)
 
 `$ pip3 install requirements.txt`
 
-### If Chrome is your default browser
-if chrome is your default browser then a desktop window will pop up when you run `app.py` but still if the window does not pops up go to http://127.0.0.1:5000 on chrome
+`$ python3 app.py`
 
-### If Chrome is not your default browser
-if chrome is not your default browser then you will need to go to  http://127.0.0.1:5000 on your web browser but still you can wait for a minute or so for the window to come up
+we have made this application using flask web gui, it can only run if you have chrome on your machine as a default browser else there might be some running issues sometime if you don't have chrome as you default browser it might run but you need to have chrome, if for some reason you don't have chrome than you need to go to http://127.0.0.1:5000 on your web browser and there you can intract with the application 
