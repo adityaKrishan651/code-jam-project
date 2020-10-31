@@ -18,7 +18,7 @@ We made a simple application Desktop that consists of some of the basic necessit
 
 ## How To Run (READ THIS)
 
-`$ pip3 install requirements.txt`
+`$ pip3 install -r requirements.txt`
 
 `$ python3 app.py`
 
