@@ -5,3 +5,4 @@ flask_sqlalchemy
 flask_uploads
 flaskwebgui
 requests
+win10toast
