@@ -1,0 +1,19 @@
+.header {
+  background: #A0A6A8;
+  height: 55px;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#todo {
+  width: 1000px;
+  margin: 50px 5px 50px 5px;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

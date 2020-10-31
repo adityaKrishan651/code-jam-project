@@ -1,85 +1,93 @@
 import random
+import secrets
+import os
 from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, send_file, request
-from flask_sqlalchemy import SQLAlchemy 
-# import pkg_resources.py2_warn #will be used when we make .exe file of app.py '''i think that we will not make an .exe'''
-from flaskwebgui import FlaskUI 
+from flask_sqlalchemy import SQLAlchemy
+from flaskwebgui import FlaskUI
 from win10toast import ToastNotifier
 from flask_uploads import UploadSet, configure_uploads, ALL
-from requests import get as request_get
-
+import requests
+ 
 toaster = ToastNotifier()
-
 app = Flask(__name__)
-
-ui = FlaskUI(app)
-
-all = UploadSet(name='files', extensions=('txt', 'py', 'rtf', 'odf', 'ods', 'gnumeric', 'abw', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp', 'csv', 'ini', 'json', 'plist', 'xml', 'yaml', 'yml', 'pdf'))
-
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///datebase.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['UPLOADED_FILES_DEST'] = 'uploads'
 db = SQLAlchemy(app)
+ui = FlaskUI(app)
+all_events = []
+all_todos = []
+
+all = UploadSet(name='files', extensions=('txt', 'py', 'rtf', 'odf', 'ods', 'gnumeric', 'abw', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp', 'csv', 'ini', 'json', 'plist', 'xml', 'yaml', 'yml', 'pdf', 'pptx'))
 configure_uploads(app, all)
 
 
-class Todo(db.Model):
-    '''
-    todo table in database
-    '''
+class Theme(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    task = db.Column(db.String(200))
-    time = db.Column(db.String(20))
+    theme = db.Column(db.String(20))
+
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(1000))
+    date = db.Column(db.String(20))
+
 
 class Note(db.Model):
-    '''
-    note table in database
-    '''
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(20))
     content = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime)
 
 
+class Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    todo = db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+
+    def __repr__(self):
+        return 'Todo ' + str(self.id)
+
+
 class File(db.Model):
-    '''
-    file table in database
-    '''
     id = db.Column(db.Integer, primary_key=True)
     file_name = db.Column(db.String(50))
     path = db.Column(db.String(20))
 
+
 @app.route('/')
-def index():
-    '''
-    index route
-    '''
-    return render_template("index.html")
+def home():
+    theme = Theme.query.all()[0].theme
+    return render_template('home.html', theme=theme)
+
 
 @app.route('/note/<int:id>')
 def note(id):
-    '''
-    note route
-    query a particular note
-    '''
+    theme = Theme.query.all()[0].theme
     note = Note.query.filter_by(id=id).one()
+    return render_template("note.html", note=note, theme=theme)
 
-    return render_template("note.html", note=note)
 
-@app.route('/notes')
-def notes():
-    '''
-    notes route
-    query all notes
-    '''
-    notes = Note.query.order_by(Note.date_created.desc()).all()
+@app.route('/notes/edit/<int:id>', methods=['POST'])
+def editNote(id):
+    note = Note.query.get_or_404(id)
+    if request.method == 'POST':
+        note.content = request.form['content']
+        db.session.commit()
 
-    return render_template("notes.html", notes=notes)
+        return redirect('/notes')
+
+
+@app.route('/notes/delete/<int:id>')
+def delete_note(id):
+    note = Note.query.get_or_404(id)
+    db.session.delete(note)
+    db.session.commit()
+    return redirect('/notes')
+
 
 @app.route('/add_note', methods=["GET", "POST"])
 def add_note():
-    '''
-    add note route
-    '''
     if request.method == "POST":
         title = request.form['title']
         content = request.form['content']
@@ -90,82 +98,56 @@ def add_note():
         return redirect(url_for("notes"))
     return render_template("add_note.html")
 
-@app.route('/delete_note/<int:id>')
-def delete_note(id):
-    '''
-    delete note route
-    '''
-    note = Note.query.get_or_404(id)
-    db.session.delete(note)
-    db.session.commit()
-    return redirect(url_for("notes"))
 
-@app.route('/todo')
+@app.route('/notes')
+def notes():
+    notes = Note.query.order_by(Note.date_created.desc()).all()
+    theme = Theme.query.all()[0].theme
+
+    return render_template("notes.html", notes=notes, theme=theme)
+
+
+@app.route('/todos', methods=['GET', 'POST'])
 def todo():
-    '''
-    todo route
-    query all todo
-    '''
-    todo_list = Todo.query.all()
-    return render_template("todo.html", todo_list=todo_list)
+    theme = Theme.query.all()[0].theme
+    if request.method == 'POST':
+        todo_new = request.form['todo']
+        new_todo = Todo(todo=todo_new)
+        db.session.add(new_todo)
+        db.session.commit()
+
+        return redirect('/todos')
+
+    elif request.method == 'GET':
+        all_todos = Todo.query.order_by(Todo.date_posted).all()
+        return render_template('todo.html', todos=all_todos, db=Todo, theme=theme)
 
 
-@app.route('/add', methods=["POST", "GET"])
-def add():
-    '''
-    add todo note
-    '''
-    task = request.form["task"]
-    time = request.form["time"]
-    new_todo = Todo(task=task, time=time)
-    toaster.show_toast(f"Reminder for {task}", f"You have to do {task} by {time} today!")
-    db.session.add(new_todo)
-    db.session.commit()
-    return redirect(url_for("todo"))
+@app.route('/todos/new', methods=['POST'])
+def new_todo():
+    theme = Theme.query.all()[0].theme
+    if request.method == 'POST':
+        todo_new = request.form['todo']
+        new_todo = Todo(todo=todo_new)
+        db.session.add(new_todo)
+        db.session.commit()
 
-@app.route('/delete/<int:id>')
+        return redirect('/todos')
+
+
+@app.route('/todos/delete/<int:id>', methods=['POST', 'GET'])
 def delete(id):
-    '''
-    delete todo route
-    '''
     todo = Todo.query.get_or_404(id)
     db.session.delete(todo)
     db.session.commit()
-    return redirect(url_for("todo"))
 
-@app.route('/cal')
-def cal():
-    '''
-    calculator route
-    '''
-    return render_template("calculator.html")
+    return redirect('/todos')
 
-@app.route('/quote')
-def quote():
-    '''
-    quote of the day  route
-    '''
-    url = "https://type.fit/api/quotes"
-    with request_get(url) as response:
-        final_quote = ""
-        if response.ok:
-            data = response.json()
-            quote = random.choice(data)
-            final_quote = f"{quote['text']}\n-{quote['author']}"
-        else:
-            with open("quotes.txt", "r") as q:
-                q = q.readlines()
-                q = random.choice(q)
-                final_quote = q
-        return render_template("quote.html", quote=final_quote)
 
 @app.route('/upload', methods=["POST", "GET"])
 def upload():
-    '''
-    file upload route
-    query all files
-    '''
     files = File.query.all()
+    theme = Theme.query.all()[0].theme
     if request.method == "POST":
         filename = all.save(request.files['file'])
         path = "uploads/" + filename
@@ -173,36 +155,79 @@ def upload():
         db.session.add(files)
         db.session.commit()
         files = File.query.all()
-        return render_template("upload.html", files=files)
-    return render_template("upload.html", files=files)
+        return render_template("upload.html", files=files, theme=theme)
+    return render_template("upload.html", files=files, theme=theme)
 
-@app.route('/download/<int:id>', methods=['GET', 'POST'])
+
+@app.route('/upload/download/<int:id>', methods=['GET', 'POST'])
 def download(id):
-    '''
-    download files route
-    '''
     file_ = File.query.get_or_404(id)
 
     return send_file(file_.path, as_attachment=True, attachment_filename=file_.file_name)
 
-@app.route('/delete_f/<int:id>')
-def delete_f(id):
-    '''
-    delete uploaded file
-    '''
-    file_ = File.query.get_or_404(id)
-    db.session.delete(file_)
-    db.session.commit()
+@app.route('/upload/delete/<int:id>', methods=['GET', 'POST'])
+def delete_file(id):
+    if request.method == 'GET':
+        file = File.query.get_or_404(id)
+        db.session.delete(file)
+        db.session.commit()
 
-    return redirect(url_for("upload"))
+        if os.path.exists(file.path):
+            os.remove(file.path)
+        else:
+            pass
+    return redirect('/upload')
 
-@app.route('/clock')
+
+@app.route('/events', methods=['GET', 'POST'])
+def allEvents():
+    theme = Theme.query.all()[0].theme
+    if request.method == 'POST':
+        title = request.form['title']
+        date = request.form['date']
+        new_event = Event(title=title, date=date)
+        db.session.add(new_event)
+        db.session.commit()
+
+        return redirect('/events')
+    else:
+        all_events = Event.query.all()
+        return render_template('calendar.html', events=all_events, theme=theme)
+
+
+@app.route('/calculator')
+def cal():
+    theme = Theme.query.all()[0].theme
+    return render_template('calculator.html', theme=theme)
+
+
+@app.route('/clock', methods=['GET'])
 def clock():
-    '''
-    clock route
-    '''
-    return render_template("clock.html")
+    theme = Theme.query.all()[0].theme
+    if request.method == 'GET':
+        res = requests.get(secrets.URL)
+        data = res.json()
 
+        temp = data['main']['temp']
+        wind_speed = data['wind']['speed']
+        humidity = data['main']['humidity']
+        description = data['weather'][0]['description']
+        icon = data['weather'][0]['icon']
+        city = data['name']
 
-if __name__ == "__main__":
-    app.run(debug=True)
+        return render_template("clock.html", theme=theme, city=city, icon=icon, temperature=temp, wind_speed=wind_speed, humidity=humidity, description=description)
+
+@app.route('/change_theme', methods=['POST'])
+def change_theme():
+    theme = Theme.query.get_or_404(1)
+    if request.method == 'POST':
+        if theme.theme == 'dark':
+            theme.theme = 'light'
+            db.session.commit()
+        elif theme.theme == 'light':
+            theme.theme = 'dark'
+            db.session.commit()
+    return redirect('/')
+
+ui.run()
+app.run()

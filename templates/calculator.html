@@ -1,80 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Student Kit | Calculator</title>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student Kit | Calculator</title>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ url_for('static', filename='cal.css' ) }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cal.css' ) }}">
+    <title>| Calculator |</title>
 </head>
-<body>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-expanded="false">
-      Menu
-    </button>
-    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-      <li><a class="dropdown-item active" href="/">Home</a></li>
-      <li><a class="dropdown-item" href="/todo">Todo List</a></li>
-      <li><a class="dropdown-item" href="/notes">Notes</a></li>
-      <li><a class="dropdown-item" href="/cal">Calculator</a></li>
-      <li><a class="dropdown-item" href="/quote">Quote of the day</a></li>
-      <li><a href="/upload" class="dropdown-item">File Upload</a></li>
-      <li><a href="/clock" class="dropdown-item">Clock</a></li>
-    </ul>
-  </div>
-  
-  <main class="calculator">
 
-    <div class="top">
+<body class="{{ theme }}">
+    <header class="header">
+        <button class="header__button" id="btnNav" type="button">
+            <i class="material-icons">menu</i>
+        </button>
+        <div class="head-content">
+            <h1 style="font-size:30px;">Calculator</h1>
+        </div>
+    </header>
+    <nav class="nav">
+        <div class="nav__links">
+            <a href="/" class="nav__link">
+                <i class="material-icons">home</i> Home
+            </a>
+            <a class="nav__link" href="/todos">
+                <i class="material-icons">assignment</i> Your Todos
+            </a>
+            <a class="nav__link" href="/notes">
+                <i class="material-icons">note</i> Your Notes
+            </a>
+            <a class="nav__link" href="/events">
+                <i class="material-icons">event</i> Your Events
+            </a>
+            <a class="nav__link" href="/upload">
+                <i class="material-icons">backup</i> File Upload
+            </a>
+            <a class="nav__link  nav__link--active" href="/calculator">
+                <i class="material-icons">calculate</i> Calculator
+            </a>
+            <a class="nav__link" href="/clock">
+                <i class="material-icons">alarm</i> Clock
+            </a>
+            <form action="/change_theme" method="POST">
+                <button style="margin-top: 270px; cursor: pointer; background:none; border: none; width: 100%;" type="submit ">
+                    <a id="theme-switcher " class="nav__link">
+                        <i class="material-icons">brightness_6</i> Switch Theme
+                    </a>
+                </button>
+            </form>
+        </div>
+        <div class="nav__overlay"></div>
+    </nav>
+    <main class="calculator">
+        <div class="top">
+            <section class="screen">
+                <div class="input"></div>
+                <div class="result"></div>
+            </section>
+        </div>
+        <div class="bottom">
+            <section class="keys">
+                <div class="column">
+                    <span data-key="7">7</span>
+                    <span data-key="4">4</span>
+                    <span data-key="1">1</span>
+                    <span data-key=".">.</span>
+                </div>
+                <div class="column">
+                    <span data-key="8">8</span>
+                    <span data-key="5">5</span>
+                    <span data-key="2">2</span>
+                    <span data-key="0">0</span>
+                </div>
+                <div class="column">
+                    <span data-key="9">9</span>
+                    <span data-key="6">6</span>
+                    <span data-key="3">3</span>
+                    <span class="equals-to" data-key="=">=</span>
+                </div>
+            </section>
 
-      <span class="unit">deg</span>
-      <section class="screen">
-        <div class="input"></div>
-        <div class="result"></div>
-      </section>
+            <section class="operators">
+                <span class="delete">del</span>
+                <span data-key="÷">÷</span>
+                <span data-key="x">x</span>
+                <span data-key="-">-</span>
+                <span data-key="+">+</span>
+            </section>
 
-    </div>
-
-    <div class="bottom">
-
-      <section class="keys">
-
-        <div class="column">
-          <span data-key="7">7</span>
-          <span data-key="4">4</span>
-          <span data-key="1">1</span>
-          <span data-key=".">.</span>
         </div>
 
-        <div class="column">
-          <span data-key="8">8</span>
-          <span data-key="5">5</span>
-          <span data-key="2">2</span>
-          <span data-key="0">0</span>
-        </div>
+    </main>
 
-        <div class="column">
-          <span data-key="9">9</span>
-          <span data-key="6">6</span>
-          <span data-key="3">3</span>
-          <span class="equals-to" data-key="=">=</span>
-        </div>
-      </section>
-
-      <section class="operators">
-        <span class="delete">del</span>
-        <span data-key="÷">÷</span>
-        <span data-key="x">x</span>
-        <span data-key="-">-</span>
-        <span data-key="+">+</span>
-      </section>
-
-    </div>
-
-  </main>
-
-<script src="{{ url_for('static', filename='main.js' )}}"></script>
+    <script src="{{ url_for('static', filename='js/main.js' )}}"></script>
+    <script type="text/javascript">
+        const nav = document.querySelector(".nav");
+        document.getElementById("theme-switcher").addEventListener("click", () => {
+            document.body.classList.toggle('dark');
+            nav.classList.remove("nav--open");
+        });
+    </script>
 </body>
+
 </html>

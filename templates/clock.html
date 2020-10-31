@@ -1,32 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='clock.css') }}">
-    <title>Student Kit | Clock</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/todo.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clock.css') }}">
+    <title>| Clock |</title>
 </head>
-<body onload="realtimeClock()">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-expanded="false">
-          Menu
-        </button>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-          <li><a class="dropdown-item active" href="/">Home</a></li>
-          <li><a class="dropdown-item" href="/todo">Todo List</a></li>
-          <li><a class="dropdown-item" href="/notes">Notes</a></li>
-          <li><a class="dropdown-item" href="/cal">Calculator</a></li>
-          <li><a class="dropdown-item" href="/quote">Quote of the day</a></li>
-          <li><a href="/upload" class="dropdown-item">File Upload</a></li>
-          <li><a href="/clock" class="dropdown-item">Clock</a></li>
-        </ul>
-      </div>
-    <div class="main-container">
-        <h1>Clock</h1>
-        <div id="clock"></div>
-    </div>
-    <script src="{{ url_for('static', filename='clock.js') }}"></script>
+
+<body class="{{ theme }}" onload="realtimeClock()">
+    <header class="header">
+        <button class="header__button" id="btnNav" type="button">
+      <i class="material-icons">menu</i>
+    </button>
+        <div class="head" style="margin-left: 0;">
+            <h1 style="margin-top: 5px;">Clock</h1>
+        </div>
+    </header>
+    <nav class="nav">
+        <div class="nav__links">
+            <a href="/" class="nav__link">
+                <i class="material-icons">home</i> Home
+            </a>
+            <a class="nav__link" href="/todos">
+                <i class="material-icons">assignment</i> Your Todos
+            </a>
+            <a class="nav__link" href="/notes">
+                <i class="material-icons">note</i> Your Notes
+            </a>
+            <a class="nav__link" href="/events">
+                <i class="material-icons">event</i> Your Events
+            </a>
+            <a class="nav__link" href="/upload">
+                <i class="material-icons">backup</i> File Upload
+            </a>
+            <a class="nav__link" href="/calculator">
+                <i class="material-icons">calculate</i> Calculator
+            </a>
+            <a class="nav__link nav__link--active" href="/clock">
+                <i class="material-icons">alarm</i> Clock
+            </a>
+            <form action="/change_theme" method="POST">
+                <button style="margin-top: 270px; cursor: pointer; background:none; border: none; width: 100%;" type="submit ">
+                    <a id="theme-switcher " class="nav__link">
+                        <i class="material-icons">brightness_6</i> Switch Theme
+                    </a>
+                </button>
+            </form>
+        </div>
+        <div class="nav__overlay"></div>
+    </nav>
+    <main>
+        <div class="main-container">
+            <div id="clock"></div>
+            <div class="city">City: {{ city }}</div>
+            <div class="metrics">
+                <small style="font-size: 15px;" class="temperature"><span class="tempHeaders">Temperature:</span> {{ temperature }} &deg;C ,
+          <span class="tempHeaders">Description:</span> {{ description }}<img style="width: 40px; height: 40px" src="https://openweathermap.org/img/w/{{ icon }}.png" alt="">,
+          <span class="tempHeaders">Humidity: </span>{{ humidity }}% ,
+          <span class="tempHeaders">Wind Speed: </span>{{ wind_speed }} m/s ,
+        </small>
+            </div>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='js/clock.js') }}"></script>
+    <script>
+        window.addEventListener("load", () => {
+            document.body.classList.remove("preload");
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const nav = document.querySelector(".nav");
+
+            document.querySelector("#btnNav").addEventListener("click", () => {
+                nav.classList.add("nav--open");
+            });
+
+            document.querySelector(".nav__overlay").addEventListener("click", () => {
+                nav.classList.remove("nav--open");
+            });
+            document.querySelector("#clock").addEventListener("click", () => {
+                nav.classList.remove("nav--open");
+            });
+            document.getElementById("theme-switcher").addEventListener("click", () => {
+                document.body.classList.toggle('dark');
+                nav.classList.remove("nav--open");
+            });
+        });
+        console.log("{{ theme }}");
+    </script>
 </body>
+
 </html>

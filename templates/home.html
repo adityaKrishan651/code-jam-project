@@ -1,0 +1,91 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <title>| Student Kit |</title>
+</head>
+
+<body class="{{ theme }}">
+    <header class="header">
+        <button class="header__button" id="btnNav" type="button">
+            <i class="material-icons">menu</i>
+        </button>
+        <div class="head">
+            <h1>Home</h1>
+        </div>
+    </header>
+    <nav class="nav">
+        <div class="nav__links">
+            <a href="/" class="nav__link  nav__link--active">
+                <i class="material-icons">home</i> Home
+            </a>
+            <a class="nav__link" href="/todos">
+                <i class="material-icons">assignment</i> Your Todos
+            </a>
+            <a class="nav__link" href="/notes">
+                <i class="material-icons">note</i> Your Notes
+            </a>
+            <a class="nav__link" href="/events">
+                <i class="material-icons">event</i> Your Events
+            </a>
+            <a class="nav__link" href="/upload">
+                <i class="material-icons">backup</i> File Upload
+            </a>
+            <a class="nav__link" href="/calculator">
+                <i class="material-icons">calculate</i> Calculator
+            </a>
+            <a class="nav__link" href="/clock">
+                <i class="material-icons">alarm</i> Clock
+            </a>
+            <form action="/change_theme" method="POST">
+                <button style="margin-top: 270px; cursor: pointer; background:none; border: none; width: 100%;" type="submit ">
+                    <a id="theme-switcher " class="nav__link">
+                        <i class="material-icons">brightness_6</i> Switch Theme
+                    </a>
+                </button>
+            </form>
+        </div>
+        <div class="nav__overlay "></div>
+    </nav>
+
+    <main style="margin: 70px 10px 10px 10px">
+        <div class="jumbotron main-content">
+            <h1 class="display-4">| Student Kit |</h1>
+            <small style="margin-bottom: 70px;">The Perfect Tool For Students</small>
+            <p id="description" style="margin-bottom: 40px;" class="lead">Student Kit is the best tool for students with features tailored to education. Have some tasks planned for the day, use the Todo to chalk them out. Want to grab a quick note, use the Notes. Stuck in a math problem ?? use the integrated Calculator.
+                Have an important test coming up, add an event on the Calendar. Have some important files you dont want to lose ?? Add it to the File Upload System and download them whenever you want. All of this is just a click away.</p>
+            <p style="margin-bottom: 45px;" id="footer-text">Student Kit is our entry for the timathon code-jam. It is developed using Flask as the backend and Bootstrap for the front-end. Our team "UnNamed" consisting of Rachithooda, aviral10 and adityaKrishan651 have worked on this. Rachithooda and
+                adityaKrishan651 have worked on the backend and the front-end is designed by adityaKrishan651. aviral10 being a senior to us has guided us and worked on bugs.</p>
+        </div>
+    </main>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.body.classList.remove("preload");
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const nav = document.querySelector(".nav");
+
+            document.querySelector("#btnNav").addEventListener("click", () => {
+                nav.classList.add("nav--open");
+            });
+
+            document.querySelector(".nav__overlay").addEventListener("click", () => {
+                nav.classList.remove("nav--open");
+            });
+            document.getElementById("theme-switcher").addEventListener("click", () => {
+                document.body.classList.toggle('dark');
+                nav.classList.remove("nav--open");
+            });
+        });
+    </script>
+</body>
+
+</html>

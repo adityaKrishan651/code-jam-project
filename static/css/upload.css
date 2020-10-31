@@ -1,0 +1,209 @@
+body {
+    --header-height: 60px;
+    --text-color: black;
+    --background-color: white;
+    --button-color: #A0A6A8;
+    --header-background: #A0A6A8;
+    --button-text-color: black;
+    --icon-color: #666;
+    margin: 50px 0 0 0;
+    font-family: sans-serif;
+    transition: background 1s;
+    background: var(--background-color);
+}
+
+.preload * {
+    transition: none !important;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: var(--text-color);
+    height: var(--header-height);
+    background: var(--header-background);
+    display: flex;
+    align-items: center;
+}
+
+.header__button {
+    width: var(--header-height);
+    flex-shrink: 0;
+    background: none;
+    outline: none;
+    border: none;
+    color: var(--button-text-color);
+    cursor: pointer;
+}
+
+.nav__links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 250px;
+    background: var(--background-color);
+    transform: translateX(-250px);
+    transition: transform 0.3s;
+}
+
+.nav--open .nav__links {
+    transform: translateX(0);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    color: var(--icon-color);
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 12px 15px;
+    background: transform 0.2s;
+}
+
+.nav__link>i {
+    margin-right: 15px;
+}
+
+.nav__link--active {
+    color: var(--text-color);
+}
+
+.nav__link--active,
+.nav__link:hover {
+    text-decoration: none;
+    background: #eee;
+    color: var(--text-color);
+}
+
+.nav__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.nav--open .nav__overlay {
+    visibility: visible;
+    opacity: 1;
+}
+
+.files_area {
+    display: flex;
+    margin-left: 30px;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.files_area div {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    border-radius: 10px;
+    height: 120px;
+    flex-direction: column;
+    background: #A0A6A8;
+}
+
+.head {
+    color: black;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+#addFileBtn {
+    background: #b4bcbf;
+    margin: 20px 0 20px 1190px;
+    border: 1px solid #A0A6A8;
+}
+
+@media only screen and (max-width: 1300px) {
+    #newBtn {
+        margin: 0 0 30px 10px
+    }
+}
+
+.editLinks {
+    margin-bottom: 10px;
+}
+
+/* DARK THEME */
+
+body.dark {
+    --header-height: 50px;
+    --text-color: white;
+    --background-color: #121212;
+    --button-color: #252425;
+    --header-background: #252425;
+    --button-text-color: white;
+    --icon-color: white;
+    background: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+.dark .head {
+    color: white !important;
+}
+
+.dark .nav__link--active,
+.dark .nav__link:hover {
+    text-decoration: none;
+    background: #252425;
+    color: var(--text-color);
+}
+
+.dark .nav__link {
+    display: flex;
+    align-items: center;
+    color: var(--icon-color) !important;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 12px 15px;
+    background: transform 0.2s;
+}
+
+.dark .modal-content {
+    background: #121212;
+}
+
+.dark .modal-content button {
+    color: white !important;
+    /* background-color: gray !important; */
+}
+
+.dark .btn {
+    background: var(--button-color) !important;
+    border: 1px solid var(--button-color) !important;
+    color: var(--button-text-color) !important;
+}
+
+.dark .editBtn {
+    border: 1px solid #A0A6A8 !important;
+}
+
+.dark .files_area div {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    border-radius: 10px;
+    height: 120px;
+    flex-direction: column;
+    background: #252425;
+}

@@ -1,19 +1,114 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Student Kit | {{ note.title }} {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/note.css') }}">
+    <title>{{ note.title }}</title>
+</head>
 
-{% block content%}
+<body class="{{ theme }}">
+    <header class="header">
+        <button class="header__button" id="btnNav" type="button">
+      <i class="material-icons">menu</i>
+    </button>
+        <div class="head">
+            <h1>{{ note.title }}</h1>
+        </div>
+    </header>
+    <nav class="nav">
+        <div class="nav__links">
+            <a href="/" class="nav__link">
+                <i class="material-icons">home</i> Home
+            </a>
+            <a class="nav__link" href="/todos">
+                <i class="material-icons">assignment</i> Your Todos
+            </a>
+            <a class="nav__link" href="/notes">
+                <i class="material-icons">note</i> Your Notes
+            </a>
+            <a class="nav__link" href="/events">
+                <i class="material-icons">event</i> Your Events
+            </a>
+            <a class="nav__link" href="/upload">
+                <i class="material-icons">backup</i> File Upload
+            </a>
+            <a class="nav__link" href="/calculator">
+                <i class="material-icons">calculate</i> Calculator
+            </a>
+            <a class="nav__link" href="/clock">
+                <i class="material-icons">alarm</i> Clock
+            </a>
+            <form action="/change_theme" method="POST">
+                <button style="margin-top: 270px; cursor: pointer; background:none; border: none; width: 100%;" type="submit ">
+                    <a id="theme-switcher " class="nav__link">
+                        <i class="material-icons">brightness_6</i> Switch Theme
+                    </a>
+                </button>
+            </form>
+        </div>
+        <div class="nav__overlay"></div>
+    </nav>
 
-<body>
-    <h3>{{ note.title }}</h3>
-    <div class="notes_area">
-      <span id="ns"><a href="{{ url_for('delete_note', id=note.id) }}" id="d">Delete</a></span>
+    <div style="margin: 30px 0 30px 0" class="delBtn">
+        <div id="ns">
+            <a id="editBtn" style="margin-left: 1190px; margin-top: 30px; display: inline;" class="btn btn-secondary" id="">Edit</a>
+            <a style="display: inline; margin-left: 10px;" class="btn btn-secondary" href="/notes/delete/{{note.id}}" id="d">Delete</a>
+        </div>
     </div>
     <hr>
-    <div class="con">
-      <p>{{ note.content }}</p>
-    </div>
+    <form action="/notes/edit/{{ note.id }}" method="POST">
+        <div class="noteContent" style="margin-left: 10px; margin-right: 10px;">
+            <textarea disabled class="form-control" name="content" id="content" cols="30" rows="15">{{ note.content }}</textarea>
+            <button id="cancelBtn" type="button" class="btn btn-secondary" style="margin: 10px; visibility: hidden;">Cancel</button>
+            <button id="saveBtn" type="submit" class="btn btn-secondary" style="margin: 10px; visibility:hidden;">Save Note</button>
+        </div>
+    </form>
 
+    <script>
+        window.addEventListener("load", () => {
+            document.body.classList.remove("preload");
+        });
 
+        document.addEventListener("DOMContentLoaded", () => {
+            const nav = document.querySelector(".nav");
 
-{% endblock %}
+            document.querySelector("#btnNav").addEventListener("click", () => {
+                nav.classList.add("nav--open");
+                document.querySelector(".all-todos").style.marginLeft = "250px";
+            });
+
+            document.querySelector(".nav__overlay").addEventListener("click", () => {
+                nav.classList.remove("nav--open");
+            });
+            document.querySelector("main").addEventListener("click", () => {
+                nav.classList.remove("nav--open");
+                document.querySelector("main").style.marginLeft = "0px";
+            });
+            document.getElementById("theme-switcher").addEventListener("click", () => {
+                document.body.classList.toggle('dark');
+                nav.classList.remove("nav--open");
+            });
+        });
+
+        document.querySelector("#editBtn").addEventListener("click", () => {
+            document.querySelector("textarea").removeAttribute("disabled");
+            document.querySelector("textarea").focus();
+            document.querySelector("#cancelBtn").style.visibility = "visible";
+            document.querySelector("#saveBtn").style.visibility = "visible";
+        })
+
+        document.querySelector("#cancelBtn").addEventListener("click", () => {
+            document.querySelector("textarea").setAttribute("disabled", "disabled");
+            document.querySelector("#cancelBtn").style.visibility = "hidden";
+            document.querySelector("#saveBtn").style.visibility = "hidden";
+        });
+    </script>
+</body>
+
+</html>

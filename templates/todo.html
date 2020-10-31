@@ -1,30 +1,105 @@
+<html lang="en">
 
-{% extends "base.html" %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>| Todo |</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/todo.css') }}">
+    <script src="{{ url_for('static', filename='js/todos.js')}}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</head>
 
-{% block title %}Student Kit | Todo List{% endblock %}
+<body class="{{ theme }}">
+    <header class="header">
+        <button class="header__button" id="btnNav" type="button">
+            <i class="material-icons">menu</i>
+        </button>
+        <div class="head">
+            <h1>Your Todos</h1>
+        </div>
+    </header>
+    <nav class="nav">
+        <div class="nav__links">
+            <a href="/" class="nav__link">
+                <i class="material-icons">home</i> Home
+            </a>
+            <a class="nav__link nav__link--active" href="/todos">
+                <i class="material-icons">assignment</i> Your Todos
+            </a>
+            <a class="nav__link" href="/notes">
+                <i class="material-icons">note</i> Your Notes
+            </a>
+            <a class="nav__link" href="/events">
+                <i class="material-icons">event</i> Your Events
+            </a>
+            <a class="nav__link" href="/upload">
+                <i class="material-icons">backup</i> File Upload
+            </a>
+            <a class="nav__link" href="/calculator">
+                <i class="material-icons">calculate</i> Calculator
+            </a>
+            <a class="nav__link" href="/clock">
+                <i class="material-icons">alarm</i> Clock
+            </a>
+            <form action="/change_theme" method="POST">
+                <button style="margin-top: 270px; cursor: pointer; background:none; border: none; width: 100%;" type="submit ">
+                    <a id="theme-switcher " class="nav__link">
+                        <i class="material-icons">brightness_6</i> Switch Theme
+                    </a>
+                </button>
+            </form>
+        </div>
+        <div class="nav__overlay"></div>
+    </nav>
+    <main style="margin: 100px 10px 10px 10px">
+        <button type="button" class="btn btn-secondary" id="newBtn" data-toggle="modal" data-target="#exampleModalCenter">
+            Add New Todo...
+        </button>
 
-{% block content%}
-<div class="t">
-    <h3 id="g">Add Some Task Todo</h3>
-    </div>
-    <div class="form-area">
-      <form action="/add" method="POST" autocomplete="off">
-        <label for="task">Task: </label>
-        <input type="text" name="task" required>
-        <p></p>
-        <label for="time">Time: </label>
-        <input type="text" name="time" value="9 pm" required><br>
-        <input style="margin-right: 190px;" class="btn-1" id="ayy" type="submit" value="Add">
-      </form>
-      <hr>
-      <div class="task-area">
-        {% for todo in todo_list %}
-            <span id="task">
-            {{ todo.id }} | {{ todo.task }} | <a href="/delete/{{ todo.id }}" id="d">✖</a>
-            </span><br>
-            <p></p>
-        {% endfor %}
-      </div>
-    </div>
+        <div class="all-todos">
+            {% if db.query.all()|length == 0 %}
+            <div class="jumbotron jumbotron-fluid">
+                <center>
+                    <div class="container">
+                        <h1 class="display-4"><i class="material-icons">insert_emoticon</i> No Tasks <i class="material-icons">insert_emoticon</i> </h1>
+                        <p class="lead">You have no todos to complete. Click the button above to add a todo.</p>
+                    </div>
+                </center>
+            </div>
+            {% else %} {% for todo in todos %}
+            <div class="my-todo alert alert-dark" style="position: static;">
+                <p style="font-size: 25px; display:inline; margin-left: 20px;">{{ todo.todo }}</p>
+                <span class="edit-icons">
+                    <a href="/todos/delete/{{ todo.id }}"><i class="material-icons">delete</i></a>
+                </span>
+            </div>
+            {% endfor %} {% endif %}
+        </div>
 
-{% endblock %}
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">New Todo...</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/todos/new" method="POST" autocomplete="off">
+                        <div class="modal-body" style="display: flex; justify-content: center; align-items: center; height: 100;">
+                            <input class="form-control" type="text" name="todo" id="todo-content" placeholder="Add Todo...">
+                        </div>
+                        <div class="modal-footer" style="display: flex; justify-content: center; align-items: center; height: 50;">
+                            <input style="background: #A0A6A8; border: 2px solid #A0A6A8;" class="btn btn-dark" type="submit" id="submit-btn" value="Add Todo" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
