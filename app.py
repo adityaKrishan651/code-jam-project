@@ -8,7 +8,7 @@ from flaskwebgui import FlaskUI
 from win10toast import ToastNotifier
 from flask_uploads import UploadSet, configure_uploads, ALL
 import requests
- 
+
 toaster = ToastNotifier()
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
