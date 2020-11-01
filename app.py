@@ -88,6 +88,7 @@ def delete_note(id):
 
 @app.route('/add_note', methods=["GET", "POST"])
 def add_note():
+    theme = Theme.query.all()[0].theme
     if request.method == "POST":
         title = request.form['title']
         content = request.form['content']
@@ -96,7 +97,7 @@ def add_note():
         db.session.commit()
 
         return redirect(url_for("notes"))
-    return render_template("add_note.html")
+    return render_template("add_note.html", theme=theme)
 
 
 @app.route('/notes')
